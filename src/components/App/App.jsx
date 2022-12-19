@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 
-import ContactForm from './ContactForm';
-import ContactList from './ContactList';
-import Filter from './Filter';
+import ContactForm from 'components/ContactForm';
+import ContactList from 'components/ContactList';
+import Filter from 'components/Filter';
+import Section from 'components/Section';
 
 class App extends Component {
   state = {
@@ -20,8 +21,9 @@ class App extends Component {
     const newContact = { id: nanoid(), name, number };
     const { contacts } = this.state;
 
-    contacts.filter(contact => contact.name === name) &&
-      alert(`${name} is already in contacts.`);
+    if (contacts.find(contact => contact.name === name)) {
+      return alert(`${name} is already in contacts.`);
+    }
 
     this.setState(({ contacts }) => ({
       contacts: [...contacts, newContact],
@@ -54,14 +56,16 @@ class App extends Component {
 
     return (
       <>
-        <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.addContact} />
-        <Filter value={filter} onChange={this.changeFilter} />
-        <h2>Contacts</h2>
-        <ContactList
-          contacts={filtredContacts}
-          onDeleteContact={this.deleteContact}
-        />
+        <Section title="Phonebook">
+          <ContactForm onSubmit={this.addContact} />
+        </Section>
+        <Section title="Contacts">
+          <Filter value={filter} onChange={this.changeFilter} />
+          <ContactList
+            contacts={filtredContacts}
+            onDeleteContact={this.deleteContact}
+          />
+        </Section>
       </>
     );
   }

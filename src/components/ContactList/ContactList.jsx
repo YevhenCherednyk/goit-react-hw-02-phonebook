@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { List } from './ContactList.styled';
 
 import ContactItem from 'components/ContactItem';
 
 const ContactList = ({ contacts, onDeleteContact }) => {
   return (
-    <ul>
+    <List>
+      
       {contacts.map(({ id, name, number }) => (
         <ContactItem
           key={id}
@@ -13,7 +15,7 @@ const ContactList = ({ contacts, onDeleteContact }) => {
           onDeleteContact={onDeleteContact}
         />
       ))}
-    </ul>
+    </List>
   );
 };
 
