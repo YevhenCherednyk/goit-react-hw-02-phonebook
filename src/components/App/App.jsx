@@ -51,13 +51,13 @@ class App extends Component {
   };
 
   render() {
-    const { filter } = this.state;
+    const { filter, contacts } = this.state;
     const filtredContacts = this.getFiltredContacts();
 
     return (
       <>
         <Section title="Phonebook">
-          <ContactForm onSubmit={this.addContact} />
+          <ContactForm onSubmit={this.addContact} contacts={contacts} />
         </Section>
         <Section title="Contacts">
           <Filter value={filter} onChange={this.changeFilter} />
